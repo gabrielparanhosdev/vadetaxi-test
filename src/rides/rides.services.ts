@@ -12,7 +12,7 @@ export function requestRide(props: RequestRide): ResponseRide {
     const { user } = selectTable("auth");
 
     if (user && rides.length > 0) {
-      const findRide = rides.find((ride: Ride) => ride.userId == user.id);
+      const findRide = rides.find((ride: Ride) => ride.userId == user.id && (ride.status == "loading" || ride.status == "moving"));
 
       if (findRide) {
         return {

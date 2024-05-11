@@ -1,5 +1,5 @@
 import { makeHttpRequest } from "./make-http-request"
-import { selectTable, insertInTo, updateTable } from "./utils.fake-db"
+import { selectTable, insertInTo, updateTable } from "./fake-db"
 import { parseUrlParams } from "./parse"
 
 export {

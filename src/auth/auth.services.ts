@@ -5,7 +5,7 @@ import { AuthRequest, ResponseAuth } from "./auth.types";
 const jwt = require('jsonwebtoken');
 const { insertInTo, selectTable } = require('../utils/fake-db');
 
-function AuthenticatorUser(props: AuthRequest): ResponseAuth {
+export function AuthenticatorUser(props: AuthRequest): ResponseAuth {
     const { payload } = props;
 
     if (payload?.email && payload?.password) {
@@ -47,6 +47,3 @@ function AuthenticatorUser(props: AuthRequest): ResponseAuth {
         statusCode: 400
     }
 }
-
-
-module.exports = { AuthenticatorUser }

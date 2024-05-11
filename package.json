@@ -2,10 +2,9 @@
   "name": "vadetaxi-test",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.ts",
+  "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --loader ts-node/esm ./src/main.ts",
+    "start": "npm run build && node ./dist/main.js",
     "build": "tsc"
   },
   "author": "",
@@ -17,9 +16,6 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.11",
-    "esm": "^3.2.25",
-    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
-  },
-  "type": "module"
+  }
 }

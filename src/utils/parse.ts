@@ -10,7 +10,7 @@
         }
 */
 
-import { ParamsObject } from "./utils.types";
+import { ParamsObject } from "./types";
 
 export const parseUrlParams = (url: string, baseUrl: string) => {
     const regex = /:([^/?]+)/g;
