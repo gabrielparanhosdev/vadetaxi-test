@@ -1,0 +1,5 @@
+{
+  "loader": "ts-node/esm",
+  "esModuleInterop": true,
+  "files": true
+}
