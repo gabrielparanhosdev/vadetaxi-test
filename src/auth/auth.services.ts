@@ -1,9 +1,9 @@
 import { User } from "../types";
+import { insertInTo, selectTable } from "../utils";
 import { AuthRequest, ResponseAuth } from "./auth.types";
 
 
 const jwt = require('jsonwebtoken');
-const { insertInTo, selectTable } = require('../utils/fake-db');
 
 export function AuthenticatorUser(props: AuthRequest): ResponseAuth {
     const { payload } = props;
@@ -32,14 +32,14 @@ export function AuthenticatorUser(props: AuthRequest): ResponseAuth {
             }
 
             return {
-                data: "User not found",
+                data: "not found",
                 statusCode: 404
             }
         }
 
         return {
-            data: "Users not found",
-            statusCode: 404
+            data: "internal db error",
+            statusCode: 500
         }
     }
     return {

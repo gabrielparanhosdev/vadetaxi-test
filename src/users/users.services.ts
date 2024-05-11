@@ -1,19 +1,21 @@
 import { ResponseService, User } from "../types";
-import { CreateUserRequest, DeleteUser, GetUser, UpdateUser} from "./users.types";
+import { insertInTo, selectTable, updateTable } from "../utils";
+import { CreateUserRequest, DeleteUser, GetUser, ResponseServiceUser, UpdateUser } from "./users.types";
 
 const { v4: uuidv4 } = require('uuid');
-const { updateTable, selectTable, insertInTo } = require('../utils/fake-db');
 
 
 export function createUser(props: CreateUserRequest): ResponseService {
 
   const { payload } = props;
 
-  if (payload?.name && payload?.email && payload?.password) {
+  if (payload && payload?.name && payload?.email && payload?.password) {
 
-    const users = selectTable("users", []);
+    const users = selectTable("users") || [];
+
     payload["id"] = uuidv4();
     users.push(payload);
+
     insertInTo('users', users)
 
     const { name, email, id } = payload
@@ -36,14 +38,14 @@ export function createUser(props: CreateUserRequest): ResponseService {
 
 }
 
-export function getUsers(props: GetUser): ResponseService {
+export function getUsers(props: GetUser): ResponseServiceUser {
   const { params } = props;
   const users = selectTable("users");
 
-  if (!users) {
+  if (!users || users.length == 0) {
     return {
       data: "Dont exist users, please insert new user!",
-      statusCode: 404
+      statusCode: 400
     }
   }
 
@@ -51,6 +53,9 @@ export function getUsers(props: GetUser): ResponseService {
     const findUser = users.find((user: User) => user.id == params.id);
 
     if (findUser) {
+
+      delete findUser["password"];
+
       return {
         data: findUser,
         statusCode: 200
@@ -64,19 +69,29 @@ export function getUsers(props: GetUser): ResponseService {
   }
 
   return {
-    data: users,
+    data: users.map((user: User) => {
+      const { name, email, id } = user;
+      return {
+        name,
+        email,
+        id
+      }
+    }),
     statusCode: 200
   };
 }
 
-export function updateUser(props: UpdateUser): ResponseService {
+export function updateUser(props: UpdateUser): ResponseServiceUser {
   const { params, payload } = props;
 
-  if (params?.id) {
+  if (params?.id && payload && Object.keys(payload).length > 0) {
     const resUpdate = updateTable('users', payload, params, "id");
     if (resUpdate) {
+
+      delete resUpdate.password
+
       return {
-        data: payload,
+        data: resUpdate,
         statusCode: 200
       }
     } else {
@@ -101,7 +116,7 @@ export function deleteUser(props: DeleteUser): ResponseService {
     if (users) {
       const newUsers = users.filter((user: User) => user.id !== params.id);
 
-      if (newUsers) {
+      if (newUsers.length > 0) {
         insertInTo('users', newUsers);
 
         return {
@@ -110,8 +125,8 @@ export function deleteUser(props: DeleteUser): ResponseService {
         }
       } else {
         return {
-          data: "User Not found",
-          statusCode: 404
+          data: "internal error",
+          statusCode: 500
         }
       }
     }

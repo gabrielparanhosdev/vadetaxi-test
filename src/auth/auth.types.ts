@@ -2,8 +2,8 @@ import { User } from "../types";
 
 interface AuthRequest {
     payload: {
-        email: string,
-        password: string
+        email?: string,
+        password?: string
     }
 }
 

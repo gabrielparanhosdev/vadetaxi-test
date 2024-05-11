@@ -1,20 +1,20 @@
-import { User } from "../types";
+import { User, UserRequest } from "../types";
 
 interface CreateUserRequest {
-    payload: User
+    payload: UserRequest
 }
 
 interface GetUser {
     params: {
-        id: string
+        id?: string
     }
 }
 
 interface UpdateUser {
     payload: {
-        name: string;
-        email: string;
-        password: string;
+        name?: string;
+        email?: string;
+        password?: string;
     }
     params: {
         id?: string
@@ -27,9 +27,16 @@ interface DeleteUser {
     }
 }
 
+interface ResponseServiceUser {
+    statusCode: number;
+    data?: string | User | Array<User>;
+    error?: string;
+}
+
 export {
     DeleteUser,
     CreateUserRequest,
     GetUser,
-    UpdateUser
+    UpdateUser,
+    ResponseServiceUser
 }

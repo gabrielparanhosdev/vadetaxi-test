@@ -1,4 +1,4 @@
-interface Ride {
+interface MakeRideResponse {
     from: string;
     to: string;
     userId: string;
@@ -7,20 +7,37 @@ interface Ride {
     created: string;
     lastUpdate: string;
 }
-
-interface RequestRide {
-    payload: Ride;
-    params: {
-        rideId?: string
+interface RideRequest {
+    payload: {
+        from?: string;
+        to?: string;
     }
 }
 
-interface ResponseRide{
+interface GetRide {
+    params: {
+        rideId?: string
+    };
+}
+interface UpdateRide {
+    params: {
+        rideId?: string
+    };
+    payload: {
+        from?: string;
+        to?: string;
+        status?: string;
+        lastUpdate?: string;
+
+    }
+}
+
+interface ResponseRide {
     statusCode: number;
-    data?: Ride | Array<Ride> | string;
+    data?: MakeRideResponse | Array<MakeRideResponse> | string;
     error?: string;
 }
 
 
 
-export { RequestRide, Ride, ResponseRide }
+export { RideRequest, GetRide, MakeRideResponse, ResponseRide, UpdateRide }

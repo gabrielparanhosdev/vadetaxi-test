@@ -4,8 +4,7 @@ Está funcionalidade pega o body e os parametros para enviar como props da funci
 
 import { IncomingMessage } from "http";
 import { parseUrlParams } from "./parse";
-
-const { urlBases } = require('../routes');
+import { urlBases } from "../routes";
 
 export function makeHttpRequest(req: IncomingMessage) {
     return new Promise((resolve, reject) => {
