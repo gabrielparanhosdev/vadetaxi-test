@@ -1,6 +1,9 @@
 # Vá de Taxi
 Nós da Vá de taxi decidimos criar um projeto utilizando Node.js como back-end, o projeto foi inteiramente tipado utilizando typescript, também oferece testes unitarios e teste automatizado via postman.
 
+<img src="https://vadetaxi.com.br/wp-content/uploads/2022/11/logotipo_header-menu-novo.png" alt="Vá de taxi" width="200"/>
+
+
 ## Passo 1: Configuração de ambiente
 O projeto é baseado em `node.js` portando certifique-se de ter o `node` instalado em sua máquina ou acesse o [link](https://nodejs.org/en), recomendamos também a instalação global do `TypeScript`, após instalar o `node` execute o seguinte comando `npm install -g typescript`.
 
