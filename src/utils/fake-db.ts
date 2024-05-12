@@ -33,3 +33,7 @@ export function updateTable(tableName: string, data: any, req: any, where: strin
 
     return null
 }
+
+export function clearCache(){
+    cache.flushAll();
+}

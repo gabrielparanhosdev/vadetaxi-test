@@ -1,4 +1,5 @@
 import { AuthenticatorUser } from "./auth/auth.services";
+import { createBank, deleteBank, getBank, updateBank } from "./bank/bank.services";
 import { getRides, requestRide, updateRide } from "./rides/rides.services";
 import { createUser, deleteUser, getUsers, updateUser } from "./users/users.services";
 
@@ -56,6 +57,16 @@ export const routes: Routes = {
         GET: { handler: getRides, authIsMandatory: true },
         PUT: { handler: updateRide, authIsMandatory: true }
     },
+    '/bank': {
+        POST: { handler: createBank, authIsMandatory: true },
+        GET: { handler: getBank, authIsMandatory: true },
+        PUT: { handler: updateBank, authIsMandatory: true },
+        DELETE: { handler: deleteBank, authIsMandatory: true }
+    },
+    // '/bank-transaction': {
+    //     POST: { handler: sendTransactionBank, authIsMandatory: true },
+    //     GET: { handler: getTransactionBank, authIsMandatory: true },
+    // },
     '/auth': {
         POST: { handler: AuthenticatorUser, authIsMandatory: false }
     }
