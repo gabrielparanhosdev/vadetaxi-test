@@ -212,7 +212,7 @@ describe('UPDATE RIDE', () => {
         const result = updateRide(props)
 
         expect(result.statusCode).toBe(400);
-        expect(result.data).toBe("ride is cancelled or done");
+        expect(result.data).toBe("ride is cancelled, done, not found or can't possibilite change");
     });
     it("should error cancelled ride return message error update", () => {
         const props = {
