@@ -1,7 +1,7 @@
 # Vá de Taxi
 Nós da Vá de taxi decidimos criar um projeto utilizando Node.js como back-end, o projeto foi inteiramente tipado utilizando typescript, também oferece testes unitarios e teste automatizado via postman.
 
-<img src="https://vadetaxi.com.br/wp-content/uploads/2022/11/logotipo_header-menu-novo.png" alt="Vá de taxi" width="200"/>
+<img src="https://vadetaxi.com.br/wp-content/uploads/2022/11/logotipo_header-menu-novo.png" alt="Vá de taxi" width="100%"/>
 
 
 ## Passo 1: Configuração de ambiente
