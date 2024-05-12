@@ -12,24 +12,24 @@ interface Routes {
 }
 
 // all users
-const USERS = "/users";
-const USERSs = "/users/";
+export const USERS = "/users";
+export const USERSs = "/users/";
 
 // user by id
-const USERSBYID = "/users/:id";
-const USERSBYIDs = "/users/:id/";
+export const USERSBYID = "/users/:id";
+export const USERSBYIDs = "/users/:id/";
 
 // all rides
-const RIDE = "/rides";
-const RIDEs = "/rides/";
+export const RIDE = "/rides";
+export const RIDEs = "/rides/";
 
 // ride action
-const RIDE_ACTION = "/rides/:rideId";
-const RIDE_ACTIONs = "/rides/:rideId/";
+export const RIDE_ACTION = "/rides/:rideId";
+export const RIDE_ACTIONs = "/rides/:rideId/";
 
 // auth
-const AUTH = "/auth";
-const AUTHs = "/auth/";
+export const AUTH = "/auth";
+export const AUTHs = "/auth/";
 
 export const urlBases = [
     USERS,

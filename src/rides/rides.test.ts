@@ -35,7 +35,7 @@ describe('REQUEST RIDE', () => {
             .mockReturnValueOnce({
                 user: {
                     id: "031372f2-88d7-4ace-87c4-4ee5b6df4d4e",
-                    name: 'John Doe',
+                    name: 'Paranhos Ga',
                     email: 'john@example.com',
                     password: "123"
                 }
@@ -84,7 +84,7 @@ describe('REQUEST RIDE', () => {
             .mockReturnValueOnce({
                 user: {
                     id: "031372f2-88d7-4ace-87c4-4ee5b6df4d4e",
-                    name: 'John Doe',
+                    name: 'Paranhos Ga',
                     email: 'john@example.com',
                     password: "123"
                 }

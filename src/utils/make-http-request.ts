@@ -9,17 +9,17 @@ import { urlBases } from "../routes";
 export function makeHttpRequest(req: IncomingMessage): Promise<string | { payload: object, params: object }> {
     return new Promise((resolve, reject) => {
         const { url } = req;
-
+        
         if (url) {
             let body = '';
 
             req.on('data', chunk => {
                 body += chunk.toString();
             });
-
+            
             req.on('end', () => {
                 let payload = {};
-
+                
                 if (body) {
                     try {
                         payload = JSON.parse(body);
@@ -28,11 +28,12 @@ export function makeHttpRequest(req: IncomingMessage): Promise<string | { payloa
                         return;
                     }
                 }
-
+                
                 const baseUrl = getBaseUrl(url);
-
+                
                 if (baseUrl) {
                     const params = parseUrlParams(url, baseUrl);
+                    console.log("teste aqui", params)
 
                     if (params) {
                         resolve({
@@ -57,7 +58,7 @@ export function makeHttpRequest(req: IncomingMessage): Promise<string | { payloa
 }
 
 // Realizamos a busca em qual baseUrl usaremos para transformar os dados da url em paramtros acesiveis em JSON
-const getBaseUrl = (url: string) => {
+export const getBaseUrl = (url: string) => {
     const matchedBaseUrl = urlBases.find((baseUrl: string) => {
         const regex = new RegExp(`^${baseUrl.replace(/:[^/?]+/g, '([^/?]+)')}$`);
         return regex.test(url);

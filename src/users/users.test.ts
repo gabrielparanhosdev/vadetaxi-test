@@ -16,7 +16,7 @@ describe('CREATE USER', () => {
     it('Create user success', () => {
         const props = {
             payload: {
-                name: 'John Doe',
+                name: 'Paranhos Ga',
                 email: 'john@example.com',
                 password: 'password123',
             },
@@ -25,14 +25,14 @@ describe('CREATE USER', () => {
         const result: ResponseService = createUser(props);
         expect(result.statusCode).toBe(200);
         expect(result.data).toHaveProperty('id');
-        expect(result.data.name).toBe('John Doe');
+        expect(result.data.name).toBe('Paranhos Ga');
         expect(result.data.email).toBe('john@example.com');
     });
 
     it('Error create user payload invalid', () => {
         const props = {
             payload: {
-                name: 'John Doe'
+                name: 'Paranhos Ga'
             },
         };
 

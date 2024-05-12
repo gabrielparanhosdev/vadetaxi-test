@@ -1,4 +1,4 @@
-import { makeHttpRequest } from "./make-http-request"
+import { makeHttpRequest, getBaseUrl } from "./make-http-request"
 import { selectTable, insertInTo, updateTable } from "./fake-db"
 import { parseUrlParams } from "./parse"
 
@@ -7,5 +7,6 @@ export {
     selectTable,
     insertInTo,
     updateTable,
-    parseUrlParams
+    parseUrlParams,
+    getBaseUrl
 }

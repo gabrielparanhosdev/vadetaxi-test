@@ -57,12 +57,12 @@ export function updateRide(props: UpdateRide): ResponseRide {
 
   if (
     params?.rideId &&
-    payload?.status && (
+    (payload?.status && (
       payload.status === "cancelled" ||
       payload.status === "loading" ||
       payload.status === "moving" ||
       payload.status === "done"
-    )
+    ) || !payload?.status)
   ) {
 
     payload["lastUpdate"] = new Date().toISOString();
@@ -71,13 +71,20 @@ export function updateRide(props: UpdateRide): ResponseRide {
     if (rides) {
       const findRide = rides.find((ride: MakeRideResponse) => ride.rideId == params.rideId);
 
-      if (findRide?.status === "cancelled" || findRide?.status === "done") {
+      if (
+        !findRide ||
+        findRide.status === "cancelled" ||
+        findRide.status === "done" ||
+        (payload?.from != findRide.from &&
+          findRide.status !== "loading") ||
+        (payload?.to != findRide.to &&
+          findRide.status !== "loading")
+      ) {
         return {
-          data: "ride is cancelled or done",
+          data: "ride is cancelled, done, not found or can't possibilite change",
           statusCode: 400
         };
       }
-
 
       const resUpdate = updateTable('rides', payload, params, "rideId");
       if (resUpdate) {
@@ -108,10 +115,10 @@ export function updateRide(props: UpdateRide): ResponseRide {
 export function getRides(props: GetRide): ResponseRide {
   const { params } = props;
   const rides = selectTable("rides");
-  if(rides && rides.length > 0){
+  if (rides && rides.length > 0) {
     if (params?.rideId) {
       const findRide = rides && rides.length > 0 && rides.find((ride: MakeRideResponse) => ride.rideId == params.rideId);
-  
+
       if (findRide) {
         return {
           data: findRide,
@@ -124,7 +131,7 @@ export function getRides(props: GetRide): ResponseRide {
         };
       }
     }
-  
+
     return {
       data: rides,
       statusCode: 200
