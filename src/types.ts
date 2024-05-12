@@ -5,8 +5,6 @@ interface ResponseService {
     error?: string;
 }
 
-
-
 interface User {
     name: string;
     email: string;
@@ -22,8 +20,9 @@ interface UserRequest {
     // Adicione outros campos do usuário conforme necessário
 }
 
+
 export {
     User,
     UserRequest,
-    ResponseService
+    ResponseService,
 }

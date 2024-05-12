@@ -4,6 +4,7 @@ import { CreateUserRequest, DeleteUser, GetUser, ResponseServiceUser, UpdateUser
 
 const { v4: uuidv4 } = require('uuid');
 
+// lembrar de criptogravar a senha
 
 export function createUser(props: CreateUserRequest): ResponseService {
 

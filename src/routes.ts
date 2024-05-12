@@ -1,7 +1,6 @@
-const { AuthenticatorUser } = require("./auth/auth.services");
-const { requestRide, getRides, updateRide } = require("./rides/rides.services");
-const { createUser, deleteUser, getUsers, updateUser } = require("./users/users.services");
-
+import { AuthenticatorUser } from "./auth/auth.services";
+import { getRides, requestRide, updateRide } from "./rides/rides.services";
+import { createUser, deleteUser, getUsers, updateUser } from "./users/users.services";
 
 interface Routes {
     [path: string]: {
@@ -48,7 +47,7 @@ export const urlBases = [
 export const routes: Routes = {
     '/users': {
         POST: { handler: createUser, authIsMandatory: false },
-        GET: { handler: getUsers, authIsMandatory: false },
+        GET: { handler: getUsers, authIsMandatory: true },
         PUT: { handler: updateUser, authIsMandatory: true },
         DELETE: { handler: deleteUser, authIsMandatory: true }
     },

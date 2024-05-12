@@ -1,25 +1,25 @@
 /*
-Está funcionalidade pega o body e os parametros para enviar como props da funcionalidade
+Está função pega o body e os parametros para enviar como props da funcionalidade solicitada do verbo em questão
 */
 
 import { IncomingMessage } from "http";
 import { parseUrlParams } from "./parse";
 import { urlBases } from "../routes";
 
-export function makeHttpRequest(req: IncomingMessage) {
+export function makeHttpRequest(req: IncomingMessage): Promise<string | { payload: object, params: object }> {
     return new Promise((resolve, reject) => {
         const { url } = req;
-        
-        if(url){
+
+        if (url) {
             let body = '';
-    
+
             req.on('data', chunk => {
                 body += chunk.toString();
             });
-    
+
             req.on('end', () => {
                 let payload = {};
-    
+
                 if (body) {
                     try {
                         payload = JSON.parse(body);
@@ -28,12 +28,12 @@ export function makeHttpRequest(req: IncomingMessage) {
                         return;
                     }
                 }
-    
+
                 const baseUrl = getBaseUrl(url);
-    
+
                 if (baseUrl) {
                     const params = parseUrlParams(url, baseUrl);
-    
+
                     if (params) {
                         resolve({
                             payload,
@@ -46,11 +46,11 @@ export function makeHttpRequest(req: IncomingMessage) {
                     reject(new Error('URL base não encontrada'));
                 }
             });
-    
+
             req.on('error', error => {
                 reject(error);
             });
-        }else{
+        } else {
             reject(new Error('erro na rota'));
         }
     });
