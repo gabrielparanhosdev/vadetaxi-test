@@ -2,6 +2,8 @@ import { IncomingMessage } from 'http';
 import { routes } from './routes';
 import { makeHttpRequest, selectTable } from './utils';
 import { ResponseService } from './types';
+import { StatusCodes, getReasonPhrase } from 'http-status-codes';
+import { getResponseCatch, getResponseError } from './utils/http';
 
 async function handleRequest(req: IncomingMessage): Promise<ResponseService> {
     const { url, method } = req;
@@ -15,25 +17,24 @@ async function handleRequest(req: IncomingMessage): Promise<ResponseService> {
                 const authHeader = req.headers?.authorization;
 
                 if (authIsMandatory && authHeader !== selectTable("auth")?.authToken || authIsMandatory && !authHeader) {
-                    throw "Not authorized";
+                    throw getReasonPhrase(StatusCodes.UNAUTHORIZED)
                 }
                 
                 try {
                     const requestData = await makeHttpRequest(req);
                     return handler(requestData);
-                } catch (error) {
+                } catch (error: any) {
                     throw error;
                 }
 
             } catch (error: any) {
-                return { statusCode: 500, error: error || 'Internal server error' };
+                return getResponseCatch(StatusCodes.INTERNAL_SERVER_ERROR, error);
             }
         } else {
-            return { statusCode: 404, data: "not found" };
+            return getResponseError(StatusCodes.NOT_FOUND);
         }
     }
-    return { statusCode: 400, data: 'dont exist route or method' };
-
+    return getResponseError(StatusCodes.METHOD_NOT_ALLOWED);
 }
 
 export { handleRequest };
