@@ -1,7 +1,7 @@
 import { User } from "../types";
 import { insertInTo, selectTable } from "../utils";
 import { AuthRequest, ResponseAuth } from "./auth.types";
-
+require('dotenv').config();
 
 const jwt = require('jsonwebtoken');
 
@@ -16,8 +16,8 @@ export function AuthenticatorUser(props: AuthRequest): ResponseAuth {
 
             if (user) {
                 const dataJwt = { userId: user.id, exp: Math.floor(Date.now() / 1000) + (60 * 60) };
-                const authToken = jwt.sign(dataJwt, 'secreto');
-                
+                const authToken = jwt.sign(dataJwt, process.env.SECRET);
+
                 insertInTo("auth", { authToken, user });
 
                 delete user.password
