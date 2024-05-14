@@ -62,28 +62,28 @@ describe('CONTROLLER REQUEST', () => {
         expect(result.statusCode).toBe(200);
     })
 
-    it('should request POST error return message dont exist route or method', async () => {
+    it('should request POST error return message Method Not Allowed', async () => {
         const result = await handleRequest(mockReq);
-        expect(result.statusCode).toBe(400);
-        expect(result.data).toBe("dont exist route or method");
+        expect(result.statusCode).toBe(405);
+        expect(result.data).toBe("Method Not Allowed");
     });
 
-    it('should request POST error return message not found', async () => {
+    it('should request POST error return message Not Found', async () => {
         mockReq.url = '/users2';
         mockReq.method = 'POST';
 
         const result = await handleRequest(mockReq);
         expect(result.statusCode).toBe(404);
-        expect(result.data).toBe("not found");
+        expect(result.data).toBe("Not Found");
     });
 
-    it('should request POST error return message Not authorized', async () => {
+    it('should request POST error return message Unauthorized', async () => {
         mockReq.url = '/rides';
         mockReq.method = 'POST';
 
         const result = await handleRequest(mockReq);
         expect(result.statusCode).toBe(500);
-        expect(result.error).toBe("Not authorized");
+        expect(result.error).toBe("Unauthorized");
     });
 
     it('should request POST error return message Internal server error', async () => {
@@ -111,7 +111,7 @@ describe('CONTROLLER REQUEST', () => {
 
         const result = await handleRequest(mockReq);
         expect(result.statusCode).toBe(500);
-        expect(result.error).toBe("Internal server error");
+        expect(result.error).toBe("Internal Server Error");
     });
 
     
