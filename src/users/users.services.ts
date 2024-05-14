@@ -117,7 +117,7 @@ export function deleteUser(props: DeleteUser): ResponseService {
     if (users) {
       const newUsers = users.filter((user: User) => user.id !== params.id);
 
-      if (newUsers.length > 0) {
+      if (newUsers.length > 0 || users.length == 1 && newUsers.length == 0) {
         insertInTo('users', newUsers);
 
         return {
