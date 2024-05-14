@@ -1,6 +1,8 @@
+import { StatusCodes } from "http-status-codes";
 import { User } from "../types";
 import { insertInTo, selectTable } from "../utils";
 import { AuthRequest, ResponseAuth } from "./auth.types";
+import { getResponseError } from "../utils/http";
 require('dotenv').config();
 
 const jwt = require('jsonwebtoken');
@@ -27,23 +29,12 @@ export function AuthenticatorUser(props: AuthRequest): ResponseAuth {
                         user,
                         authToken
                     },
-                    statusCode: 200
+                    statusCode: StatusCodes.OK
                 }
             }
-
-            return {
-                data: "not found",
-                statusCode: 404
-            }
+            return getResponseError(StatusCodes.NOT_FOUND)
         }
-
-        return {
-            data: "internal db error",
-            statusCode: 500
-        }
+        return getResponseError(StatusCodes.INTERNAL_SERVER_ERROR)
     }
-    return {
-        data: "payload is invalid",
-        statusCode: 400
-    }
+    return getResponseError(StatusCodes.BAD_REQUEST)
 }
