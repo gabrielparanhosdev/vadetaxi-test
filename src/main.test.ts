@@ -20,13 +20,13 @@ describe('SERVER TEST', () => {
         expect(response.body.data).toHaveProperty("id");
     });
 
-    it('should respond Not authorized', async () => {
+    it('should respond Unauthorized', async () => {
         const response = await request(server)
             .post('/rides');
 
         // Verifica se a resposta está correta com os dados esperados
         expect(response.status).toBe(500);
-        expect(response.body.error).toBe("Not authorized");
+        expect(response.body.error).toBe("Unauthorized");
     });
 
     it('should respond other error', async () => {
