@@ -67,7 +67,7 @@ describe('AUTH', () => {
         const result = AuthenticatorUser(props);
 
         expect(result.statusCode).toBe(404);
-        expect(result.data).toBe('not found');
+        expect(result.data).toBe('Not Found');
     })
     it('should error message internal db error', () => {
         const props = {
@@ -83,7 +83,7 @@ describe('AUTH', () => {
         const result = AuthenticatorUser(props);
 
         expect(result.statusCode).toBe(500);
-        expect(result.data).toBe('internal db error');
+        expect(result.data).toBe('Internal Server Error');
     })
     it('should error message payload is invalid', () => {
         const props = {
@@ -96,6 +96,6 @@ describe('AUTH', () => {
         const result = AuthenticatorUser(props);
 
         expect(result.statusCode).toBe(400);
-        expect(result.data).toBe('payload is invalid');
+        expect(result.data).toBe('Bad Request');
     })
 })
