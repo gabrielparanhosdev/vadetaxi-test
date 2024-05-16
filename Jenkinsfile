@@ -30,7 +30,7 @@ pipeline {
                     fi
                     """
                     def dockerImage = docker.image("teste-tecnico:latest")
-                    dockerImage.run("-d -p 3000:3000 --name ${CONTAINER_NAME}")
+                    dockerImage.run("-d -p 3001:3001 --name ${CONTAINER_NAME}")
                 }
             }
         }
