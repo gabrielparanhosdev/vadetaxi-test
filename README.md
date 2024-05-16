@@ -3,6 +3,9 @@ Nós da Vá de taxi decidimos criar um projeto utilizando Node.js como back-end,
 
 <img src="https://vadetaxi.com.br/wp-content/uploads/2022/11/logotipo_header-menu-novo.png" alt="Vá de taxi" width="100%"/>
 
+## Link do back-end em produção
+https://teste.paranhos.cloud/
+
 
 ## Passo 1: Configuração de ambiente
 O projeto é baseado em `node.js` portando certifique-se de ter o `node` instalado em sua máquina ou acesse o [link](https://nodejs.org/en), recomendamos também a instalação global do `TypeScript`, após instalar o `node` execute o seguinte comando `npm install -g typescript`.
