@@ -4,7 +4,8 @@
     "target": "ES2021",
     "outDir": "./dist",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["node","jest"] 
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
