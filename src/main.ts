@@ -27,7 +27,7 @@ export function createServer(){
 
 const server = createServer();
 
-const PORT = 4000;
+const PORT = 3001;
 server.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
